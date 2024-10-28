@@ -1,13 +1,7 @@
 import { Injectable } from '@nestjs/common';
 
-type WordInfo = {
-  word: string;
-  photo: string;
-  wrongPhotos: string[];
-};
-
 const getUrlToPhoto = async (word: string) => {
-  const API_KEY = 'yourkeyhere';
+  const API_KEY = 'KEY_HERE_FOR_PIXABAP';
   const URL = 'https://pixabay.com/api/?key=' + API_KEY + '&q=' + encodeURIComponent(word) + '&orientation=vertical';
 
   const results = await fetch(URL);
@@ -22,20 +16,7 @@ const getUrlToPhoto = async (word: string) => {
 @Injectable()
 export class AppService {
   async getRandomWord() {
-    const randomSentences = new Map<number, WordInfo>();
-
-    const randomEnglishWords = [
-      'entertain',
-      'sodomize',
-      'afterglow',
-      'serendipity',
-      'normalize',
-      'stoic',
-      'impure',
-      'rejoiced',
-      'feelings',
-      'hangover',
-    ];
+    const randomEnglishWords = ['lost', 'found', 'submissive', 'aggressive'];
     const chosenRandomWord = randomEnglishWords[Math.floor(Math.random() * randomEnglishWords.length)];
     const url = await getUrlToPhoto(chosenRandomWord);
     const notChosenWords = randomEnglishWords
@@ -45,16 +26,10 @@ export class AppService {
     const firstWrongPhoto = await getUrlToPhoto(notChosenWords.at(0) as string);
     const secondWrongPhoto = await getUrlToPhoto(notChosenWords.at(1) as string);
     const thirdWrongPhoto = await getUrlToPhoto(notChosenWords.at(2) as string);
-    randomSentences.set(0, {
+    return {
       word: chosenRandomWord,
       photo: url,
       wrongPhotos: [firstWrongPhoto, secondWrongPhoto, thirdWrongPhoto],
-    });
-
-    // return random sentence from map
-    const countOfMap = randomSentences.size;
-    const randomIndex = Math.floor(Math.random() * countOfMap);
-
-    return randomSentences.get(randomIndex);
+    };
   }
 }
