@@ -3,19 +3,18 @@
 Simple "game" done as a webapp to teach my daughter some english words.
 
 image::app_ui.png[]
-]
 
 It's been developed in TypeScript with React+Vite and NestJS.
+
+== Game goal
+
+Player is presented with four pictures and single word. Score is given if user answers according to correct or false answer.
 
 == Rationale
 
 I wanted a challenge - in 1 hour write a webapp as a fullstack.
 
 And I did, tremendously wrong. This is a result of 1h crunch at midnight.
-
-== Game goal
-
-Player is presented with four pictures and single word. Score is given if user answers according to correct or false answer.
 
 == Result
 
