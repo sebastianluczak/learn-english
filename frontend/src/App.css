@@ -1,0 +1,90 @@
+#root {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+}
+
+.logo {
+  height: 6em;
+  padding: 1.5em;
+  will-change: filter;
+  transition: filter 300ms;
+}
+.logo:hover {
+  filter: drop-shadow(0 0 2em #646cffaa);
+}
+.logo.react:hover {
+  filter: drop-shadow(0 0 2em #61dafbaa);
+}
+
+@keyframes logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  a:nth-of-type(2) .logo {
+    animation: logo-spin infinite 20s linear;
+  }
+}
+
+.navbar {
+  position: fixed; /* Fixes the navbar to the top */
+  top: 0; /* Align to the top */
+  left: 0; /* Align to the left */
+  right: 0; /* Align to the right */
+  background-color: #394149; /* Background color for navbar */
+  color: white; /* Text color */
+  padding: 10px; /* Spacing */
+  text-align: center; /* Center the text */
+  z-index: 1000; /* Ensure it is above other content */
+}
+
+.card {
+  text-align: center;
+  margin-top: 50px; /* Space below the navbar */
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px; /* Increased space between images */
+  margin-top: 20px; /* Space above grid */
+}
+
+.grid-item {
+  border: none; /* Remove button border */
+  background: whitesmoke; /* Remove button background */
+  cursor: default; /* Change cursor on hover */
+  width: 340px; /* Set fixed width for the grid item */
+  height: 340px; /* Set fixed height for the grid item */
+  overflow: hidden; /* Hide overflow */
+  position: relative; /* Required for absolute positioning of background */
+}
+
+.grid-item img {
+  width: 100%; /* Make images responsive */
+  height: 100%; /* Fill the height */
+  object-fit: cover; /* Maintain aspect ratio while filling */
+  border-radius: 8px; /* Optional: rounded corners */
+  transition: transform 0.2s; /* Add a small animation */
+}
+
+.grid-item:hover img {
+  transform: scale(1.05); /* Slightly enlarge on hover */
+}
+
+.correct {
+  border: 5px solid green; /* Green border for correct choice */
+  background-color: rgba(0, 255, 0, 0.1); /* Light green background */
+}
+
+.incorrect {
+  border: 5px solid red; /* Red border for incorrect choice */
+  background-color: rgba(255, 0, 0, 0.1); /* Light red background */
+}
