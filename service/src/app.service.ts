@@ -7,13 +7,8 @@ type WordInfo = {
 };
 
 const getUrlToPhoto = async (word: string) => {
-  const API_KEY = '46773761-a14c40396ad70399c253b2016';
-  const URL =
-    'https://pixabay.com/api/?key=' +
-    API_KEY +
-    '&q=' +
-    encodeURIComponent(word) +
-    '&orientation=vertical';
+  const API_KEY = 'yourkeyhere';
+  const URL = 'https://pixabay.com/api/?key=' + API_KEY + '&q=' + encodeURIComponent(word) + '&orientation=vertical';
 
   const results = await fetch(URL);
   if (results.ok) {
@@ -41,17 +36,14 @@ export class AppService {
       'feelings',
       'hangover',
     ];
-    const chosenRandomWord =
-      randomEnglishWords[Math.floor(Math.random() * randomEnglishWords.length)];
+    const chosenRandomWord = randomEnglishWords[Math.floor(Math.random() * randomEnglishWords.length)];
     const url = await getUrlToPhoto(chosenRandomWord);
     const notChosenWords = randomEnglishWords
       .filter((word) => word !== chosenRandomWord)
       .sort(() => Math.random() - 0.5);
 
     const firstWrongPhoto = await getUrlToPhoto(notChosenWords.at(0) as string);
-    const secondWrongPhoto = await getUrlToPhoto(
-      notChosenWords.at(1) as string,
-    );
+    const secondWrongPhoto = await getUrlToPhoto(notChosenWords.at(1) as string);
     const thirdWrongPhoto = await getUrlToPhoto(notChosenWords.at(2) as string);
     randomSentences.set(0, {
       word: chosenRandomWord,
