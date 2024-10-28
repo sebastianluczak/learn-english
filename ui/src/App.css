@@ -58,7 +58,7 @@
 }
 
 .grid-item {
-  border: none; /* Remove button border */
+  border: inherit; /* Remove button border */
   background: whitesmoke; /* Remove button background */
   cursor: default; /* Change cursor on hover */
   width: 340px; /* Set fixed width for the grid item */
@@ -75,16 +75,29 @@
   transition: transform 0.2s; /* Add a small animation */
 }
 
+.guess-word {
+  font-weight: bold;
+  font-size: 2.4em;
+  margin-top: 10px;
+  border: solid #2b2b2b;
+  color: #b7baff;
+}
+
 .grid-item:hover img {
   transform: scale(1.05); /* Slightly enlarge on hover */
 }
 
 .correct {
   border: 5px solid green; /* Green border for correct choice */
-  background-color: rgba(0, 255, 0, 0.1); /* Light green background */
+  background-color: green; /* Light green background */
 }
 
 .incorrect {
   border: 5px solid red; /* Red border for incorrect choice */
-  background-color: rgba(255, 0, 0, 0.1); /* Light red background */
+  background-color: red; /* Light red background */
+}
+
+.emphasized {
+  font-size: larger;
+  font-weight: bold;
 }

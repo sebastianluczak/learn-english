@@ -15,9 +15,13 @@ function App() {
   const [isCorrect, setIsCorrect] = useState<boolean | null>(null);
   const [correctGuesses, setCorrectGuesses] = useState(0);
   const [incorrectGuesses, setIncorrectGuesses] = useState(0);
+  const [readTheDocs, setReadTheDocs] = useState<string>("");
 
   const fetchDataFromBackend = async () => {
+    setReadTheDocs("");
     setData("Losuję nowy wyraz...");
+    setWrongPhotos([]);
+
     const response = await fetch('http://localhost:8080/words/get');
     if (response.ok) {
       const json = await response.json() as JsonResponse;
@@ -35,13 +39,19 @@ function App() {
   };
 
   const handlePhotoClick = (photo: string) => {
+    if (selectedPhoto === photo) {
+      setReadTheDocs("Nie możesz zaznaczyć dwa razy tej samej odpowiedzi...");
+      return;
+    }
     setSelectedPhoto(photo);
     const correct = photo === photoToGuess;
     setIsCorrect(correct);
 
     if (correct) {
+      setReadTheDocs("😊 Brawo! To prawidłowa odpowiedź!")
       setCorrectGuesses(prev => prev + 1);
     } else {
+      setReadTheDocs("🥺 Pudło! Spróbuj ponownie lub przejdź do następnej zagadki.")
       setIncorrectGuesses(prev => prev + 1);
     }
   };
@@ -49,20 +59,21 @@ function App() {
   return (
     <>
       <div className="navbar">
-        <span>Prawidowo: {correctGuesses}</span> <span>| </span>
-        <span>Nieprawidłowo: {incorrectGuesses}</span>
+        <span className="emphasized correct">Prawidowo: {correctGuesses}</span> <span>| </span>
+        <span className="emphasized incorrect">Nieprawidłowo: {incorrectGuesses}</span>
       </div>
-      <div>
-        <a href="#" target="_blank">
-          {/* SVG logo here */}
-        </a>
-      </div>
-      <h1>Learn English</h1>
+      <h1>🧑‍🏫 Learn English</h1>
+      <h2>Ucz się języka angielskiego</h2>
+
       <div className="card">
         <button onClick={fetchDataFromBackend}>
-          <h2>Nowa zagadka</h2>
+          <h2>Zgadnij nowy wyraz w języku angielskim</h2>
         </button>
-        <h2>{wordToGuess?.toUpperCase()}</h2>
+        <div className={"guess-word"}>{wordToGuess?.toUpperCase()}</div>
+
+        <p className="read-the-docs">
+          <h2>{readTheDocs}</h2>
+        </p>
 
         <div className="grid">
           {wrongPhotos.map((photo, index) => (
@@ -71,12 +82,11 @@ function App() {
               className={`grid-item ${selectedPhoto === photo ? (isCorrect ? 'correct' : 'incorrect') : ''}`}
               onClick={() => handlePhotoClick(photo)}
             >
-              <img src={photo} alt={`Guess ${index}`} />
+              <img src={photo} alt={`Guess ${index}`}/>
             </button>
           ))}
         </div>
       </div>
-      <p className="read-the-docs"></p>
     </>
   );
 }
