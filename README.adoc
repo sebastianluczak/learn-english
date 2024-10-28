@@ -1,0 +1,5 @@
+= Learn English
+
+Simple "game" done as a webapp to teach my daughter some english words.
+
+It's been developed in TypeScript with React+Vite and NestJS.
