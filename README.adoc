@@ -2,6 +2,8 @@
 
 Simple "game" done as a webapp to teach my daughter some english words.
 
+image::webui.png[]
+
 It's been developed in TypeScript with React+Vite and NestJS.
 
 == Rationale
@@ -12,4 +14,4 @@ And I did, tremendously wrong. This is a result of 1h crunch at midnight.
 
 == Result
 
-Working app. I'm kinda proud. Daughter is excited to play with it.
+Working app. I'm kinda proud. Daughter is excited to play with it. Was fun. Will fullstack again.
