@@ -19,3 +19,23 @@ And I did, tremendously wrong. This is a result of 1h crunch at midnight.
 == Result
 
 Working app. I'm kinda proud. Daughter is excited to play with it. Was fun. Will fullstack again.
+
+== Installation
+
+Clone repository, install devenv.sh, run:
+
+[source,shell]
+----
+devenv up
+----
+
+You should see API working on http://localhost:8080 and UI on http://localhost:5173
+
+== Testing
+
+Run:
+
+[source,shell]
+----
+devenv shell
+----
