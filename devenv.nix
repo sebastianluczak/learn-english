@@ -1,4 +1,4 @@
-{ pkgs, lib, config, inputs, ... }:
+{ pkgs, lib, config, ... }:
 
 {
   env.GREET = "LE-dev";
@@ -30,5 +30,10 @@
     };
     shellcheck.enable = true;
     nixpkgs-fmt.enable = true;
+    actionlint.enable = true;
+    beautysh.enable = true;
+    deadnix.enable = true;
+    detect-private-keys.enable = true;
+    eslint.enable = true;
   };
 }
