@@ -1,43 +1,7 @@
-export const dictionary = () => {
-  return [
-    'peach',
-    'cherry',
-    'lemon',
-    'grape',
-    'banana',
-    'orange',
-    'plum',
-    'pineapple',
-    'apple',
-    'pear',
-    'strawberry',
-    'bread',
-    'pizza',
-    'milk',
-    'butter',
-    'cake',
-    'chocolate',
-    'cheese',
-    'meat',
-    'eggs',
-    'jam',
-    'water',
-    'ham',
-    'ice cream',
-    'candies',
-    'honey',
-    'salt',
-    'sugar',
-    'olive oil',
-    'fish',
-    'lettuce',
-    'lemon juice',
-    'cereal',
-    'fries',
-  ];
-  return ['tomato', 'carrot', 'pepper', 'cucumber', 'potato', 'broccoli', 'pumpkin', 'peas', 'onion', 'garlic'];
-  return ['Pen', 'Book', 'Rubber', 'Scissors', 'Paints', 'Crayon', 'Ruler', 'Pencil', 'Bag', 'Glue'];
-  return [
+import { Dictionary } from './dictonaries.factory';
+
+export const animalsDictionary: Dictionary = {
+  entries: [
     'Aardvark',
     'Albatross',
     'Alligator',
@@ -261,5 +225,5 @@ export const dictionary = () => {
     'Wren',
     'Yak',
     'Zebra',
-  ];
+  ],
 };

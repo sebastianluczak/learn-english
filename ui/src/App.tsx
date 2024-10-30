@@ -7,7 +7,10 @@ type JsonResponse = {
   wrongPhotos: string[];
 };
 
+const categories = ['food', 'animals'];
+
 function App() {
+  const [currentCategory, setCurrentCategory] = useState<string>('food');
   const [wordToGuess, setData] = useState<string | undefined>();
   const [photoToGuess, setPhoto] = useState<string | undefined>();
   const [wrongPhotos, setWrongPhotos] = useState<string[]>([]);
@@ -22,7 +25,8 @@ function App() {
     setData("Losuję nowy wyraz...");
     setWrongPhotos([]);
 
-    const response = await fetch('http://localhost:8080/words/get');
+    const response = await fetch(`http://localhost:8080/words/get?category=${currentCategory}`);
+    console.log(`After response of ${currentCategory}`);
     if (response.ok) {
       const json = await response.json() as JsonResponse;
 
@@ -48,12 +52,17 @@ function App() {
     setIsCorrect(correct);
 
     if (correct) {
-      setReadTheDocs("😊 Brawo! To prawidłowa odpowiedź!")
+      setReadTheDocs("😊 Brawo! To prawidłowa odpowiedź!");
       setCorrectGuesses(prev => prev + 1);
     } else {
-      setReadTheDocs("🥺 Pudło! Spróbuj ponownie lub przejdź do następnej zagadki.")
+      setReadTheDocs("🥺 Pudło! Spróbuj ponownie lub przejdź do następnej zagadki.");
       setIncorrectGuesses(prev => prev + 1);
     }
+  };
+
+  const handleCategoryChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    setCurrentCategory(event.target.value);
+    setReadTheDocs(`Zmieniono kategorię na: ${event.target.value}`);
   };
 
   return (
@@ -64,6 +73,17 @@ function App() {
       </div>
       <h1>🧑‍🏫 Learn English</h1>
       <h2>Ucz się języka angielskiego</h2>
+
+      <div className="category-selector">
+        <label htmlFor="category">Wybierz kategorię:</label>
+        <select id="category" value={currentCategory} onChange={handleCategoryChange}>
+          {categories.map((category) => (
+            <option key={category} value={category}>
+              {category.charAt(0).toUpperCase() + category.slice(1)} {}
+            </option>
+          ))}
+        </select>
+      </div>
 
       <div className="card">
         <button onClick={fetchDataFromBackend}>
