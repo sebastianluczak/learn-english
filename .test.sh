@@ -1,5 +1,6 @@
+#!/usr/bin/sh
 echo "Environment is ready for tests :-)";
 echo "Starting Frontend tests..."
-cd ui && npm ci && npm run lint:check && cd ../
+cd ui && npm install && npm run lint:check && cd ../
 echo "Starting Backend tests..."
-cd service && npm ci && npm run lint:check && cd ../
+cd service && npm install && npm run lint:check && cd ../
