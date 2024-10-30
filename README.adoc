@@ -37,5 +37,14 @@ Run:
 
 [source,shell]
 ----
-devenv shell
+devenv test
+----
+
+== Development
+
+Run:
+
+[source,shell]
+----
+devenv up
 ----
