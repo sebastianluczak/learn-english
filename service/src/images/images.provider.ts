@@ -10,7 +10,7 @@ export class ImagesProvider {
 
   async getUrlToPhoto(word: string) {
     if (this.cache.exists(word)) {
-      return this.cache.grab(word);
+      return this.cache.grab(word)?.response || '';
     }
 
     const URL = this.apiHost + '?key=' + this.apiKey + '&q=' + encodeURIComponent(word) + '&orientation=vertical';
