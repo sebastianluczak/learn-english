@@ -1,14 +1,15 @@
 import { Injectable } from '@nestjs/common';
-import { dictionary } from './dictionary';
 import { ImagesProvider } from './images/images.provider';
+import { DictionariesFactory, SupportedCategories } from './dictionaries/dictonaries.factory';
 
 @Injectable()
 export class AppService {
   constructor(private readonly imagesProvider: ImagesProvider) {}
 
-  async getRandomWord() {
-    const randomEnglishWords = dictionary();
+  async getRandomWord(category: SupportedCategories = 'food') {
+    const randomEnglishWords = new DictionariesFactory().createForCategory(category).entries;
     const chosenRandomWord = randomEnglishWords[Math.floor(Math.random() * randomEnglishWords.length)];
+    console.log(chosenRandomWord);
     const notChosenWords = randomEnglishWords
       .filter((word) => word !== chosenRandomWord)
       .sort(() => Math.random() - 0.5);
