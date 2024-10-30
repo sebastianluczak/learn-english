@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import {useEffect, useState} from 'react';
 import './App.css';
 
 type JsonResponse = {
@@ -64,6 +64,10 @@ function App() {
     setCurrentCategory(event.target.value);
     setReadTheDocs(`Zmieniono kategorię na: ${event.target.value}`);
   };
+
+  useEffect(() => {
+    fetchDataFromBackend();
+  }, [currentCategory]);
 
   return (
     <>
