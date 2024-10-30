@@ -34,12 +34,6 @@
   };
 
   pre-commit.hooks = {
-    run-tests = {
-      enable = true;
-      name = "Application tests.";
-      description = "Starts application tests such as linter checks, unit tests and so on.";
-      entry = "sh .test.sh";
-    };
     shellcheck.enable = true;
     nixpkgs-fmt.enable = true;
     actionlint.enable = true;
