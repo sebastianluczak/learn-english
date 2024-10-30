@@ -4,7 +4,6 @@ Simple "game" done as a webapp to teach my daughter some english words.
 
 image::app_ui.png[]
 
-image::app_ui.png[]
 It's been developed in TypeScript with React+Vite and NestJS.
 
 == Game goal
