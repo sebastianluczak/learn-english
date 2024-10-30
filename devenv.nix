@@ -21,6 +21,13 @@
   enterTest = ''
   '';
 
+  tasks = {
+    "app:install" = {
+      exec = "cd service && npm install && cd ../ui && npm install";
+      before = [ "devenv:enterTest" ];
+    };
+  };
+
   pre-commit.hooks = {
     run-tests = {
       enable = true;
