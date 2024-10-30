@@ -5,9 +5,10 @@
 
   packages = [
     pkgs.git
-    pkgs.nodejs_21
     pkgs.figlet
   ];
+
+  languages.typescript.enable = true;
 
   processes = { } // lib.optionalAttrs (!config.devenv.isTesting) {
     backend_start.exec = "cd service && npm install && npm run build && npm run start:dev";
