@@ -5,7 +5,7 @@
 
   packages = [
     pkgs.git
-    pkgs.nodejs_20
+    pkgs.nodejs_21
     pkgs.figlet
   ];
 
