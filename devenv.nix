@@ -34,6 +34,5 @@
     beautysh.enable = true;
     deadnix.enable = true;
     detect-private-keys.enable = true;
-    eslint.enable = true;
   };
 }
