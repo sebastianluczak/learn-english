@@ -78,37 +78,41 @@ function App() {
       <h1>🧑‍🏫 Learn English</h1>
       <h2>Ucz się języka angielskiego</h2>
 
-      <div className="category-selector">
-        <label htmlFor="category">Wybierz kategorię:</label>
-        <select id="category" value={currentCategory} onChange={handleCategoryChange}>
-          {categories.map((category) => (
-            <option key={category} value={category}>
-              {category.charAt(0).toUpperCase() + category.slice(1)} {}
-            </option>
-          ))}
-        </select>
-      </div>
+      <div className="main-container">
+        <div className="left-column">
+          <div className="category-selector">
+            <label htmlFor="category">Wybierz kategorię:</label>
+            <select id="category" value={currentCategory} onChange={handleCategoryChange}>
+              {categories.map((category) => (
+                <option key={category} value={category}>
+                  {category.charAt(0).toUpperCase() + category.slice(1)}
+                </option>
+              ))}
+            </select>
+          </div>
 
-      <div className="card">
-        <button onClick={fetchDataFromBackend}>
-          <h2>Zgadnij nowy wyraz w języku angielskim</h2>
-        </button>
-        <div className={"guess-word"}>{wordToGuess?.toUpperCase()}</div>
+          <button onClick={fetchDataFromBackend}>
+            <h2>Zgadnij nowy wyraz w języku angielskim</h2>
+          </button>
 
-        <p className="read-the-docs">
-          <h2>{readTheDocs}</h2>
-        </p>
+          <p className="read-the-docs">
+            <h2>{readTheDocs}</h2>
+          </p>
+        </div>
 
-        <div className="grid">
-          {wrongPhotos.map((photo, index) => (
-            <button
-              key={index}
-              className={`grid-item ${selectedPhoto === photo ? (isCorrect ? 'correct' : 'incorrect') : ''}`}
-              onClick={() => handlePhotoClick(photo)}
-            >
-              <img src={photo} alt={`Guess ${index}`}/>
-            </button>
-          ))}
+        <div className="right-column">
+          <div className={"guess-word"}>{wordToGuess?.toUpperCase()}</div>
+          <div className="grid">
+            {wrongPhotos.map((photo, index) => (
+              <button
+                key={index}
+                className={`grid-item ${selectedPhoto === photo ? (isCorrect ? 'correct' : 'incorrect') : ''}`}
+                onClick={() => handlePhotoClick(photo)}
+              >
+                <img src={photo} alt={`Guess ${index}`} />
+              </button>
+            ))}
+          </div>
         </div>
       </div>
     </>

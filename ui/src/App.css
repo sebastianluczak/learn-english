@@ -7,6 +7,26 @@
   text-align: center;
 }
 
+/* Add this CSS to App.css or any relevant stylesheet */
+
+.main-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr; /* Two equal-width columns */
+  gap: 20px; /* Space between columns */
+}
+
+.left-column {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+.right-column .grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* Two images per row */
+  gap: 10px;
+}
+
 .logo {
   height: 6em;
   padding: 1.5em;
@@ -86,8 +106,8 @@ select:hover {
   border: inherit;
   background: whitesmoke;
   cursor: default;
-  width: 340px;
-  height: 340px;
+  width: 400px;
+  height: 400px;
   overflow: hidden;
   position: relative;
 }
