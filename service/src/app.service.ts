@@ -9,7 +9,6 @@ export class AppService {
   async getRandomWord(category: SupportedCategories = 'food') {
     const randomEnglishWords = new DictionariesFactory().createForCategory(category).entries;
     const chosenRandomWord = randomEnglishWords[Math.floor(Math.random() * randomEnglishWords.length)];
-    console.log(chosenRandomWord);
     const notChosenWords = randomEnglishWords
       .filter((word) => word !== chosenRandomWord)
       .sort(() => Math.random() - 0.5);

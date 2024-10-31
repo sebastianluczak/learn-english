@@ -3,7 +3,7 @@ import { CacheService } from './cache.service';
 
 @Injectable()
 export class ImagesProvider {
-  private readonly apiKey = 'YOUR_KEY_HERE';
+  private readonly apiKey = 'YOUR_KEY';
   private readonly apiHost = 'https://pixabay.com/api/';
 
   constructor(private readonly cache: CacheService) {}
