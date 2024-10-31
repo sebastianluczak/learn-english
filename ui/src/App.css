@@ -75,19 +75,20 @@
 }
 
 .category-selector {
-  margin: 5px 0; /* Space around the category selector */
+  margin: 20px 0; /* Space around the category selector */
 }
 
 .category-selector label {
   margin-right: 10px;
   font-weight: bold;
+  font-size: 1.3em;
 }
 
 select {
-  padding: 8px;
+  padding: 14px;
   border-radius: 4px;
   border: 1px solid #ccc;
-  font-size: 16px;
+  font-size: 20px;
   transition: border-color 0.3s;
 }
 
@@ -106,8 +107,8 @@ select:hover {
   border: inherit;
   background: whitesmoke;
   cursor: default;
-  width: 400px;
-  height: 400px;
+  width: 440px;
+  height: 440px;
   overflow: hidden;
   position: relative;
 }
@@ -160,4 +161,35 @@ button {
 
 button:hover {
   background-color: #2b2b2b; /* Darker shade on hover */
+}
+
+.riddle-history {
+  margin-top: 20px;
+}
+
+.history-images img {
+  margin-right: 2px;
+  border-radius: 4px;
+}
+
+@keyframes explode {
+  0% {
+    transform: scale(1);
+    background-color: #4CAF50;
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.5);
+    background-color: #00ff8c;
+    opacity: 0.9;
+  }
+  100% {
+    transform: scale(1);
+    background-color: #394149;
+    opacity: 1;
+  }
+}
+
+.explode {
+  animation: explode 0.6s ease-out forwards;
 }
