@@ -3,6 +3,8 @@ import { DndProvider, useDrag, useDrop } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
 import './SimpleMath.css';
 
+type Board = string[];
+
 const ItemType = {
   NUMBER: 'number',
   OPERATOR: 'operator',
@@ -34,30 +36,50 @@ const DroppableCell = ({ onDrop, value }: { onDrop: (item: any) => void; value: 
   });
 
   return (
-    <div ref={drop} className={`droppable-cell ${isOver ? 'hover' : ''}`}>
+    <div ref={drop} className={`droppable-cell ${isOver ? 'hover' : ''} ${operators.includes(value ?? '') ? ' operator' : ''}`}>
       {value}
     </div>
   );
 };
 
 function SimpleMath() {
-  const [board, setBoard] = useState<(string | null)[]>(Array(25).fill(null));
+  const [board, setBoard] = useState<Board>([]);
+  const [isCorrect, setIsCorrect] = useState<boolean | null>(null);
+  const [userNotification, setUserNotification] = useState<string>("");
 
-  const validateBoard = () => {
-    const rows = Array.from({ length: 5 }, (_, i) => board.slice(i * 5, i * 5 + 5));
-    const isValidEquation = (row: (string | null)[]) => {
-      const expression = row.filter((cell) => cell).join('');
-      try {
-        return eval(expression) >= 0 && eval(expression) <= 100;
-      } catch {
-        return false;
-      }
-    };
-
-    if (rows.every(isValidEquation)) {
-      alert('All equations are correct!');
+  const useBackendBoard = async () => {
+    const response = await fetch('http://localhost:8080/math/board');
+    if (response.ok) {
+      setBoard(await response.json());
     } else {
-      alert('Some equations are incorrect or out of range.');
+      setBoard(Array(40).fill('?'));
+    }
+  }
+
+  const validateBoard = async () => {
+    const response = await fetch(
+      `http://localhost:8080/math/board/validate`,
+      {
+        method: 'POST',
+        mode: 'cors',
+        body: JSON.stringify(board),
+        headers: {
+          "Content-Type": "application/json"
+        }
+      });
+    if (response.ok) {
+      const res = await response.json() as { valid: boolean };
+      if (res.valid) {
+        setUserNotification("Brawo, to prawidłowa odpowiedź!")
+        setIsCorrect(true);
+      } else {
+        setUserNotification("Niestety, gdzieś czai się błąd ...")
+        setIsCorrect(false);
+      }
+    } else {
+      console.error(response);
+      setUserNotification(response.statusText);
+      setIsCorrect(false);
     }
   };
 
@@ -69,27 +91,43 @@ function SimpleMath() {
     });
   };
 
-  return (
-    <DndProvider backend={HTML5Backend}>
-      <div className="simple-math">
-        <div className="immutable-column">
-          {[...numbers, ...operators].map((value) => (
-            <DraggableItem key={value} value={value}/>
-          ))}
+  return (<>
+      <div className="navbar">
+        <span className="emphasized correct">Prawidowo: 0</span> <span>| </span>
+        <span className="emphasized incorrect">Nieprawidłowo: 1</span> <span>| </span>
+        <a href={"/"} className="link">Powrót</a>
+      </div>
+
+      <h1>🧮 Simple Math</h1>
+      <button onClick={useBackendBoard} className={isCorrect ? 'explode' : ''}>
+        Wygeneruj nowe równania
+      </button>
+      <p className={isCorrect ? 'explode read-the-docs' : 'read-the-docs'}>
+        <h2>{userNotification}</h2>
+      </p>
+      <DndProvider backend={HTML5Backend}>
+
+        <div className="simple-math">
+          <div className="immutable-column">
+            {[...numbers, ...operators].map((value) => (
+              <DraggableItem key={value} value={value}/>
+            ))}
+          </div>
+
+          <div className="board">
+            {board.map((cellValue, index) => (
+              <DroppableCell key={index} value={cellValue} onDrop={handleDrop(index)}/>
+            ))}
+          </div>
+
         </div>
 
-        <div className="board">
-          {board.map((cellValue, index) => (
-            <DroppableCell key={index} value={cellValue} onDrop={handleDrop(index)}/>
-          ))}
-        </div>
 
         <button onClick={validateBoard} className="validate-button">
-          Validate
+          Sprawdź rozwiązanie
         </button>
-
-      </div>
-    </DndProvider>
+      </DndProvider>
+    </>
   );
 }
 

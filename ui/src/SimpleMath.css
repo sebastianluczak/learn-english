@@ -5,9 +5,9 @@
 }
 
 .immutable-column {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
+  display: grid;
+  grid-template-columns: repeat(3, 60px);
+  grid-gap: 0.5rem;
 }
 
 .draggable-item {
@@ -26,12 +26,12 @@
 
 .board {
   display: grid;
-  grid-template-columns: repeat(5, 60px);
+  grid-template-columns: repeat(8, 60px);
   grid-gap: 0.5rem;
 }
 
 .droppable-cell {
-  width: 60px;
+  width: 40px;
   height: 60px;
   background-color: #474747;
   border: 1px solid #ccc;
@@ -57,6 +57,13 @@
   cursor: pointer;
   font-weight: bold;
 }
+
 .validate-button:hover {
   background-color: #388e3c;
+}
+
+.operator {
+  background-color: #373737;
+  color: #6ee86a;
+  border-color: #373737;
 }
