@@ -1,0 +1,74 @@
+/* Dashboard CSS */
+.dashboard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 2rem;
+  min-height: 100vh;
+}
+
+.dashboard h1 {
+  font-size: 4rem;
+  color: #9c9c9c;
+  text-shadow: 2px 2px #292626;
+  margin-bottom: 2rem;
+}
+
+.dashboard ul {
+  list-style-type: none;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+}
+
+.dashboard li {
+  border-radius: 12px;
+  padding: 1rem 2rem;
+  font-size: 1.8rem;
+  font-weight: bold;
+  text-shadow: 1px 1px #595858;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.dashboard li:hover {
+  transform: scale(1.1);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+  cursor: pointer;
+}
+
+.dashboard a {
+  text-decoration: none;
+  color: inherit;
+}
+
+/* Add some bounce animation */
+@keyframes bounce {
+  0%, 20%, 50%, 80%, 100% {
+    transform: translateY(0);
+  }
+  40% {
+    transform: translateY(-10px);
+  }
+  60% {
+    transform: translateY(-5px);
+  }
+}
+
+.dashboard li {
+  animation: bounce 1.5s infinite;
+  animation-delay: calc(0.1s * var(--i));
+}
+
+/* Responsive styling */
+@media (max-width: 600px) {
+  .dashboard ul {
+    flex-direction: column;
+  }
+
+  .dashboard li {
+    font-size: 1.2rem;
+    padding: 0.8rem 1.5rem;
+  }
+}

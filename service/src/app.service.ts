@@ -26,4 +26,37 @@ export class AppService {
       wrongPhotos: [firstWrongPhoto, secondWrongPhoto, thirdWrongPhoto],
     };
   }
+
+  generateEquations(count: number): string[] {
+    const equations: string[] = [];
+
+    while (equations.length < count) {
+      const equation = this.createEquation();
+      if (equation) {
+        equations.push(equation);
+      }
+    }
+
+    return equations;
+  }
+
+  private createEquation(): string | null {
+    const num1 = this.getRandomInt(1, 99);
+    const num2 = this.getRandomInt(1, 99);
+
+    const operator1 = Math.random() > 0.5 ? '+' : '-';
+    const leftSide = eval(`${num1} ${operator1} ${num2}`);
+
+    if (Number.isInteger(leftSide) && leftSide >= 0 && leftSide <= 99) {
+      const equation = `${num1}${operator1}${num2}=${leftSide}`;
+
+      return equation.length === 8 ? equation : null;
+    }
+
+    return null;
+  }
+
+  private getRandomInt(min: number, max: number): number {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+  }
 }
